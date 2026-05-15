@@ -4,6 +4,7 @@ import Footer from './components/sections/Footer';
 import Home from './pages/Home';
 import TalkToExpert from './pages/TalkToExpert';
 import ForMSPsPage from './pages/ForMSPsPage';
+import SOCAugmentation from './pages/SOCAugmentation';
 
 function App() {
   return (
@@ -23,8 +24,9 @@ function App() {
             <Route path="/success-stories" element={<div className="pt-32 text-center text-white">Success Stories Page</div>} />
             <Route path="/resources" element={<div className="pt-32 text-center text-white">Resources Page</div>} />
             <Route path="/talk-to-experts" element={<TalkToExpert />} />
-            <Route path="*" element={<div className="pt-32 px-4 text-center text-white">This page is coming soon.</div>} />
             <Route path="/services/for-msps" element={<ForMSPsPage />} />
+            <Route path="/services/soc-augmentation" element={<SOCAugmentation />} />
+            <Route path="*" element={<div className="pt-32 px-4 text-center text-white">This page is coming soon.</div>} />
 
           </Routes>
         </main>

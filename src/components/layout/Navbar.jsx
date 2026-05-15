@@ -152,7 +152,7 @@ const Navbar = () => {
                                 White-Label Services →
                               </Link>
                             </li>
-                            <li><Link to="/services/soc-operations" className="text-xs text-gray-700 hover:text-[#FE5538] transition block py-1 pl-3">• SOC Operations & Augmentation</Link></li>
+                            <li><Link to="/services/soc-augmentation" className="text-xs text-gray-700 hover:text-[#FE5538] transition block py-1">• SOC Operations & Augmentation</Link></li>
                             <li className="pl-3"><Link to="/services/threat-monitoring" className="text-xs text-gray-600 hover:text-[#FE5538] transition block py-0.5">• Threat Monitoring</Link></li>
                             <li className="pl-3"><Link to="/services/incident-response" className="text-xs text-gray-600 hover:text-[#FE5538] transition block py-0.5">• Incident Response</Link></li>
                             <li className="pl-3"><Link to="/services/white-label-security" className="text-xs text-gray-600 hover:text-[#FE5538] transition block py-0.5">• White-label Security</Link></li>
@@ -379,7 +379,7 @@ const Navbar = () => {
                     <div className="pl-2 space-y-2">
                       {/* MOBILE: White-Label Services Link */}
                       <Link to="/services/for-msps" className="block text-xs text-[#FE5538] hover:text-[#FE5538] py-1 font-semibold">White-Label Services →</Link>
-                      <Link to="/services/soc-operations" className="block text-xs text-gray-400 hover:text-[#FE5538] py-1 pl-3">• SOC Operations & Augmentation</Link>
+                      <Link to="/services/soc-augmentation" className="block text-xs text-gray-400 hover:text-[#FE5538] py-1 pl-3">• SOC Operations & Augmentation</Link>
                       <Link to="/services/threat-monitoring" className="block text-xs text-gray-400 hover:text-[#FE5538] py-1 pl-3">• Threat Monitoring</Link>
                       <Link to="/services/incident-response" className="block text-xs text-gray-400 hover:text-[#FE5538] py-1 pl-3">• Incident Response</Link>
                       <Link to="/services/white-label-security" className="block text-xs text-gray-400 hover:text-[#FE5538] py-1 pl-3">• White-label Security</Link>
