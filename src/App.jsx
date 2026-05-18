@@ -5,6 +5,8 @@ import Home from './pages/Home';
 import TalkToExpert from './pages/TalkToExpert';
 import ForMSPsPage from './pages/ForMSPsPage';
 import SOCAugmentation from './pages/SOCAugmentation';
+import Aboutus from './pages/Aboutus';
+
 
 function App() {
   return (
@@ -14,7 +16,10 @@ function App() {
         <main className="w-full pt-16 md:pt-20">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/about-us" element={<div className="pt-32 text-center text-white">About Us Page</div>} />
+
+            {/* ✅ About Us — now uses the real Aboutus component */}
+            <Route path="/about-us" element={<Aboutus />} />
+
             <Route path="/careers" element={<div className="pt-32 text-center text-white">Careers Page</div>} />
             <Route path="/contact-us" element={<div className="pt-32 text-center text-white">Contact Page</div>} />
             <Route path="/report-attack" element={<div className="pt-32 text-center text-white">Report Attack Page</div>} />
@@ -27,7 +32,6 @@ function App() {
             <Route path="/services/for-msps" element={<ForMSPsPage />} />
             <Route path="/services/soc-augmentation" element={<SOCAugmentation />} />
             <Route path="*" element={<div className="pt-32 px-4 text-center text-white">This page is coming soon.</div>} />
-
           </Routes>
         </main>
         <Footer />

@@ -27,7 +27,7 @@ const TalkToExpert = () => {
               color: '#FFFFFF'
             }}
           >
-            Talk to a <span style={{ color: '#FE5538' }}>Security Expert</span>
+            Talk to a Security Expert
           </h2>
 
           {/* Description */}
