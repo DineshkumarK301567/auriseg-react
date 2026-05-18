@@ -1,13 +1,13 @@
 import { lazy, Suspense } from 'react';
 
-const AboutHero     = lazy(() => import('../components/Aboutus/AboutHero'));
-const AboutFoundation     = lazy(() => import('../components/Aboutus/AboutFoundation'));
-const AboutStats     = lazy(() => import('../components/Aboutus/AboutStats'));
-const AboutPosture     = lazy(() => import('../components/Aboutus/AboutPosture'));
-const AboutTeam     = lazy(() => import('../components/Aboutus/AboutTeam'));
-const AboutGlobal     = lazy(() => import('../components/Aboutus/AboutGlobal'));
-const Certifications     = lazy(() => import('../components/Aboutus/Certifications'));
-const TalkToExpert     = lazy(() => import('../components/Aboutus/TalkToExpert'));
+const AboutHero     = lazy(() => import('../components/AboutUs/AboutHero'));
+const AboutFoundation     = lazy(() => import('../components/AboutUs/AboutFoundation'));
+const AboutStats     = lazy(() => import('../components/AboutUs/AboutStats'));
+const AboutPosture     = lazy(() => import('../components/AboutUs/AboutPosture'));
+const AboutTeam     = lazy(() => import('../components/AboutUs/AboutTeam'));
+const AboutGlobal     = lazy(() => import('../components/AboutUs/AboutGlobal'));
+const Certifications     = lazy(() => import('../components/AboutUs/Certifications'));
+const TalkToExpert     = lazy(() => import('../components/AboutUs/TalkToExpert'));
 
 /*const AboutMission  = lazy(() => import('../components/Aboutus/AboutMission'));
 const AboutStats    = lazy(() => import('../components/Aboutus/AboutStats'));
