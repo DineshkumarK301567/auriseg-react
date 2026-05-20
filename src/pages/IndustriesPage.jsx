@@ -29,6 +29,39 @@ const IndustriesPage = () => {
       <Suspense fallback={<SectionLoader />}>
         <IndustriesHero />
       </Suspense>
+      <Suspense fallback={<SectionLoader />}>
+        <IndustriesStats />
+      </Suspense>
+      <Suspense fallback={<SectionLoader />}>
+        <IndustriesProblem />
+      </Suspense>
+      <Suspense fallback={<SectionLoader />}>
+        <IndustriesSolutions />
+      </Suspense>
+      <Suspense fallback={<SectionLoader />}>
+        <IndustriesCompliance />
+      </Suspense>
+      <Suspense fallback={<SectionLoader />}>
+        <IndustriesTargetAudience />
+      </Suspense>
+     <Suspense fallback={<SectionLoader />}>
+        <IndustriesCaseStudies />
+      </Suspense>
+    <Suspense fallback={<SectionLoader />}>
+        <IndustriesTestimonials />
+      </Suspense>
+      <Suspense fallback={<SectionLoader />}>
+        <WhyAuriseg />
+      </Suspense>
+      <Suspense fallback={<SectionLoader />}>
+        <FAQ />
+      </Suspense>
+      <Suspense fallback={<SectionLoader />}>
+        <SocWhatYouGet />
+      </Suspense>
+      <Suspense fallback={<SectionLoader />}>
+        <TalkToExpert />
+      </Suspense>
     </div>
   );
 };
