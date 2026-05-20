@@ -8,7 +8,7 @@ const AboutTeam     = lazy(() => import('../components/AboutUs/AboutTeam'));
 const AboutGlobal     = lazy(() => import('../components/AboutUs/AboutGlobal'));
 const Certifications     = lazy(() => import('../components/AboutUs/Certifications'));
 const TalkToExpert     = lazy(() => import('../components/AboutUs/TalkToExpert'));
-const AboutTimeline    = lazy(() => import('../components/AboutUs/AboutTimeline'));
+const AboutTimeline    = lazy(() => import('../components/AboutUs/TimelineTemp'));
 
 /*const AboutMission  = lazy(() => import('../components/Aboutus/AboutMission'));
 const AboutStats    = lazy(() => import('../components/Aboutus/AboutStats'));
