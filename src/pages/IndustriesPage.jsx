@@ -11,7 +11,7 @@ const IndustriesTargetAudience = lazy(() => import('../components/industries/Ind
 const IndustriesCaseStudies = lazy(() => import('../components/industries/IndustriesCaseStudies'));
 const IndustriesTestimonials = lazy(() => import('../components/industries/IndustriesTestimonials'));
 const WhyAuriseg = lazy(() => import('../components/industries/WhyAuriseg'));
-const faq = lazy(() => import('../components/industries/FAQ'));
+const faq = lazy(() => import('../components/industries/Faq'));
 const SocWhatYouGet = lazy(() => import('../components/industries/SocWhatYouGet'));
 const TalkToExpert = lazy(() => import('../components/industries/TalkToExpert'));
 
