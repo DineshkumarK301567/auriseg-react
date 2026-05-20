@@ -8,6 +8,7 @@ const AboutTeam     = lazy(() => import('../components/AboutUs/AboutTeam'));
 const AboutGlobal     = lazy(() => import('../components/AboutUs/AboutGlobal'));
 const Certifications     = lazy(() => import('../components/AboutUs/Certifications'));
 const TalkToExpert     = lazy(() => import('../components/AboutUs/TalkToExpert'));
+const AboutTimeline    = lazy(() => import('../components/AboutUs/AboutTimeline'));
 
 /*const AboutMission  = lazy(() => import('../components/Aboutus/AboutMission'));
 const AboutStats    = lazy(() => import('../components/Aboutus/AboutStats'));
@@ -47,6 +48,9 @@ const Aboutus = () => {
         <AboutTeam />
       </Suspense>
       <Suspense fallback={<SectionLoader />}>
+        <AboutTimeline />
+      </Suspense>
+      <Suspense fallback={<SectionLoader />}>
         <AboutGlobal />
       </Suspense>
       <Suspense fallback={<SectionLoader />}>
@@ -55,6 +59,7 @@ const Aboutus = () => {
       <Suspense fallback={<SectionLoader />}>
         <TalkToExpert />
       </Suspense>
+      
     </div>
   );
 };

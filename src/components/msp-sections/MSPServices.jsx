@@ -52,354 +52,435 @@ const MSPServices = () => {
     }
   ];
 
-  // Mobile scroll handlers
   const GAP = 12;
 
-const handleScroll = () => {
-  if (scrollRef.current) {
-    const scrollLeft = scrollRef.current.scrollLeft;
-    const cardWidth = scrollRef.current.children[0]?.offsetWidth || 0;
-
-    const index = Math.round(scrollLeft / (cardWidth + GAP));
-
-    setCurrentIndex(index);
-    setScrollPosition(scrollLeft);
-  }
-};
+  const handleScroll = () => {
+    if (scrollRef.current) {
+      const scrollLeft = scrollRef.current.scrollLeft;
+      const cardWidth = scrollRef.current.children[0]?.offsetWidth || 0;
+      const index = Math.round(scrollLeft / (cardWidth + GAP));
+      setCurrentIndex(index);
+      setScrollPosition(scrollLeft);
+    }
+  };
 
   const scrollToCard = (index) => {
-  if (!scrollRef.current) return;
-
-  const card = scrollRef.current.children[index];
-
-  card.scrollIntoView({
-    behavior: 'smooth',
-    inline: 'center'
-  });
-
-  setCurrentIndex(index);
-};
-
-  const handlePrev = () => {
-    if (currentIndex > 0) {
-      scrollToCard(currentIndex - 1);
-    }
+    if (!scrollRef.current) return;
+    const card = scrollRef.current.children[index];
+    card.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+    setCurrentIndex(index);
   };
 
-  const handleNext = () => {
-    if (currentIndex < services.length - 1) {
-      scrollToCard(currentIndex + 1);
-    }
-  };
+  const handlePrev = () => { if (currentIndex > 0) scrollToCard(currentIndex - 1); };
+  const handleNext = () => { if (currentIndex < services.length - 1) scrollToCard(currentIndex + 1); };
 
   return (
-    <section className="w-full bg-white py-16 md:py-20">
-      <div className="container-custom px-0 sm:px-6 md:px-8 max-w-[1240px] mx-auto">
-        
-        {/* SERVICE Badge */}
-       <div className="flex justify-center md:justify-start mb-6 md:mb-8">
-          <div
-            className="inline-flex items-center justify-center gap-2"
-            style={{
-              border: '1px solid #CACACA',
-              padding: '10px 11px',
-              backgroundColor: '#FFFFFF'
-            }}
-          >
-            <img
-              src="/icons/playbook-icon.png"
-              alt="icon"
-              style={{ width: '8px', height: '11.2px' }}
-              onError={(e) => { e.target.style.display = 'none'; }}
-            />
-            <span style={{
-              fontFamily: "'Roboto Mono', monospace",
-              fontWeight: 500,
-              fontSize: '16px',
-              color: '#FE5538'
-            }}>
-            SERVICE
-            </span>
-          </div>
-        </div>
-        {/* Section Header */}
-       <div className="mb-10 md:mb-12">
-  <h2
-    style={{
-      fontFamily: "'Cabinet Grotesk', sans-serif",
-      fontWeight: 500,
-      fontSize: 'clamp(28px, 5vw, 44px)',
-      lineHeight: '110%',
-      letterSpacing: '-0.02em',
-      textAlign: 'center',
-      color: '#000000',
-      maxWidth: '1238px',
-      margin: '0 auto'
-    }}
-    className="md:!text-left"
-  >
-    Everything You Need for <br className="hidden md:block" />
-    Security Already Built
-  </h2>
-</div>
+    <>
+      {/* ════════════════════════════════
+          DESKTOP — hidden on mobile
+          Same width pattern as SocWhatYouGet
+      ════════════════════════════════ */}
+      <section
+        className="hidden md:block"
+        style={{
+          width: '100vw',
+          marginLeft: 'calc(50% - 50vw)',
+          background: '#FFFFFF',
+          padding: '80px 0',
+          boxSizing: 'border-box'
+        }}
+      >
+        <div className="w-full px-8 md:px-12 lg:px-16 xl:px-20">
+          <div style={{ maxWidth: '1240px', margin: '0 auto' }}>
 
-        {/* DESKTOP VIEW - Grid Layout with NO SPACES and NO ROUNDED CORNERS */}
-        <div className="hidden md:block">
-          <div className="flex flex-wrap">
-            {services.map((service, index) => (
-              <div 
-                key={index}
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-                className="relative bg-white transition-all duration-300 cursor-pointer overflow-hidden"
+            {/* SERVICE Badge */}
+            <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '24px' }}>
+              <div
                 style={{
-                  width: '33.333%',
-                  minHeight: '308px',
-                  border: '0.5px solid #ADADAD',
-                  borderTop: index < 3 ? '0.5px solid #ADADAD' : 'none',
-                  borderLeft: index % 3 === 0 ? '0.5px solid #ADADAD' : 'none'
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  border: '1px solid #CACACA',
+                  padding: '10px 11px',
+                  backgroundColor: '#FFFFFF'
                 }}
               >
-                {/* Hover Background Overlay */}
-                <div className={`absolute inset-0 bg-[#FF5536] transition-all duration-300 ${
-                  hoveredIndex === index ? 'opacity-100' : 'opacity-0'
-                }`}></div>
-                
-                {/* Content - Relative to stay above overlay */}
-                <div className="relative z-10 p-6">
-                  {/* Icon Container - Normal: #FF5536, Hover: White */}
-                  <div className="mb-4">
-                    <img 
-                      src={service.icon}
-                      alt={service.title}
-                      className="w-11 h-11 object-contain transition-all duration-300"
-                      style={{ 
-                        width: '44px', 
-                        height: '44px',
-                        filter: hoveredIndex === index ? 'brightness(0) invert(1)' : 'invert(48%) sepia(98%) saturate(2000%) hue-rotate(0deg) brightness(100%) contrast(100%)'
-                      }}
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.style.backgroundColor = hoveredIndex === index ? '#FFFFFF' : '#FF5536';
-                        e.target.style.borderRadius = '8px';
-                        e.target.style.padding = '10px';
-                      }}
-                    />
-                  </div>
+                <img
+                  src="/icons/playbook-icon.png"
+                  alt="icon"
+                  style={{ width: '8px', height: '11.2px' }}
+                  onError={(e) => { e.target.style.display = 'none'; }}
+                />
+                <span style={{
+                  fontFamily: "'Roboto Mono', monospace",
+                  fontWeight: 500,
+                  fontSize: '16px',
+                  color: '#FE5538'
+                }}>
+                  SERVICE
+                </span>
+              </div>
+            </div>
 
-                  {/* Title */}
-                  <h3 
-                    className="font-bold mb-3 transition-all duration-300"
+            {/* Section Header */}
+            <div style={{ marginBottom: '48px' }}>
+              <h2
+                style={{
+                  fontFamily: "'Cabinet Grotesk', sans-serif",
+                  fontWeight: 500,
+                  fontSize: 'clamp(28px, 5vw, 44px)',
+                  lineHeight: '110%',
+                  letterSpacing: '-0.02em',
+                  textAlign: 'left',
+                  color: '#000000',
+                  margin: 0
+                }}
+              >
+                Everything You Need for <br />
+                Security Already Built
+              </h2>
+            </div>
+
+            {/* Desktop Grid */}
+            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+              {services.map((service, index) => (
+                <div
+                  key={index}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                  className="relative transition-all duration-300 cursor-pointer overflow-hidden"
+                  style={{
+                    width: '33.333%',
+                    minHeight: '308px',
+                    background: '#FFFFFF',
+                    border: '0.5px solid #ADADAD',
+                    borderTop: index < 3 ? '0.5px solid #ADADAD' : 'none',
+                    borderLeft: index % 3 === 0 ? '0.5px solid #ADADAD' : 'none',
+                    position: 'relative'
+                  }}
+                >
+                  {/* Hover Background Overlay */}
+                  <div
+                    className="absolute inset-0 transition-all duration-300"
                     style={{
-                      fontFamily: "'Cabinet Grotesk', sans-serif",
-                      fontWeight: 500,
-                      fontSize: 'clamp(16px, 3vw, 26px)',
-                      lineHeight: '100%',
-                      letterSpacing: '-2%',
-                      color: hoveredIndex === index ? '#FFFFFF' : '#13284C'
+                      background: '#FF5536',
+                      opacity: hoveredIndex === index ? 1 : 0,
+                      position: 'absolute',
+                      inset: 0
                     }}
-                  >
-                    {service.title}
-                  </h3>
+                  />
 
-                  {/* Description */}
-                  <p 
-                    className="mb-4 leading-relaxed transition-all duration-300"
-                    style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontWeight: 400,
-                      fontSize: 'clamp(12px, 3vw, 16px)',
-                      lineHeight: '150%',
-                      letterSpacing: '0%',
-                      color: hoveredIndex === index ? '#FFFFFF' : '#606060'
-                    }}
-                  >
-                    {service.description}
-                  </p>
+                  {/* Content */}
+                  <div style={{ position: 'relative', zIndex: 10, padding: '24px' }}>
+                    <div style={{ marginBottom: '16px' }}>
+                      <img
+                        src={service.icon}
+                        alt={service.title}
+                        style={{
+                          width: '44px',
+                          height: '44px',
+                          objectFit: 'contain',
+                          transition: 'filter 0.3s',
+                          filter: hoveredIndex === index
+                            ? 'brightness(0) invert(1)'
+                            : 'invert(48%) sepia(98%) saturate(2000%) hue-rotate(0deg) brightness(100%) contrast(100%)'
+                        }}
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.style.backgroundColor = hoveredIndex === index ? '#FFFFFF' : '#FF5536';
+                          e.target.style.borderRadius = '8px';
+                          e.target.style.padding = '10px';
+                        }}
+                      />
+                    </div>
 
-                  {/* Explore Button - Appears on hover (Desktop only) */}
-                  <div className={`transition-all duration-300 ${
-                    hoveredIndex === index ? 'opacity-100 block' : 'opacity-0 hidden'
-                  }`}>
-                    <Link 
-                      to={service.link}
-                      className="inline-flex items-center justify-center font-semibold transition-all duration-300 hover:gap-2"
+                    <h3
                       style={{
-                        width: '133px',
-                        height: '50px',
-                        background: 'transparent',
-                        border: '1px solid #FFFFFF',
-                        borderRadius: '0px',
-                        fontFamily: "'Inter', sans-serif",
+                        fontFamily: "'Cabinet Grotesk', sans-serif",
                         fontWeight: 500,
-                        fontSize: '14px',
-                        color: '#FFFFFF',
-                        textDecoration: 'none',
-                        gap: '8px'
+                        fontSize: 'clamp(16px, 3vw, 26px)',
+                        lineHeight: '100%',
+                        letterSpacing: '-0.02em',
+                        color: hoveredIndex === index ? '#FFFFFF' : '#13284C',
+                        marginBottom: '12px',
+                        transition: 'color 0.3s'
                       }}
                     >
-                      Explore →
-                    </Link>
+                      {service.title}
+                    </h3>
+
+                    <p
+                      style={{
+                        fontFamily: "'Inter', sans-serif",
+                        fontWeight: 400,
+                        fontSize: 'clamp(12px, 3vw, 16px)',
+                        lineHeight: '150%',
+                        color: hoveredIndex === index ? '#FFFFFF' : '#606060',
+                        marginBottom: '16px',
+                        transition: 'color 0.3s'
+                      }}
+                    >
+                      {service.description}
+                    </p>
+
+                    {hoveredIndex === index && (
+                      <Link
+                        to={service.link}
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          width: '133px',
+                          height: '50px',
+                          background: 'transparent',
+                          border: '1px solid #FFFFFF',
+                          borderRadius: '0px',
+                          fontFamily: "'Inter', sans-serif",
+                          fontWeight: 500,
+                          fontSize: '14px',
+                          color: '#FFFFFF',
+                          textDecoration: 'none',
+                          gap: '8px'
+                        }}
+                      >
+                        Explore →
+                      </Link>
+                    )}
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+
           </div>
         </div>
+      </section>
 
-        {/* MOBILE VIEW - Horizontal Scroll Carousel (Square cards, no rounded corners) */}
-        <div className="md:hidden relative" role="region" aria-label="Services carousel">
-          {/* Carousel Container */}
-          <div
-            ref={scrollRef}
-            onScroll={handleScroll}
-            className="flex overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide"
-            role="list"
-            style={{
-              scrollSnapType: 'x mandatory',
-              WebkitOverflowScrolling: 'touch',
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none',
-              gap: '12px',
-              paddingLeft: 'calc(50% - 133.5px)',      // 👈 space from left screen
-              paddingRight:  'calc(50% - 133.5px)'  
-            }}
-          >
-            {services.map((service, index) => (
+      {/* ════════════════════════════════
+          MOBILE — hidden on desktop
+          Same width pattern as SocWhatYouGet
+      ════════════════════════════════ */}
+      <section
+        className="md:hidden"
+        style={{
+          width: '100vw',
+          marginLeft: 'calc(50% - 50vw)',
+          background: '#FFFFFF',
+          padding: '40px 0',
+          boxSizing: 'border-box'
+        }}
+      >
+        <div style={{ width: '100%', padding: '0 16px', boxSizing: 'border-box' }}>
+          <div style={{ maxWidth: '374px', margin: '0 auto' }}>
+
+            {/* SERVICE Badge — centered on mobile */}
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
               <div
-                key={index}
-                role="listitem"
-                className="flex-shrink-0 snap-center bg-white"
                 style={{
-                  width: '267px',
-                  minHeight: '209px',
-                  border: '0.78px solid #ADADAD',
-                  
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px',
+                  border: '0.52px solid #CACACA',
+                  padding: '5px 6px',
+                  backgroundColor: '#FFFFFF'
                 }}
               >
-                {/* Content */}
-                <div className="p-4">
-                  {/* Icon - Always #FF5536 on mobile */}
-                  <div className="mb-3">
-                    <img 
-                      src={service.icon}
-                      alt={service.title}
-                      className="w-9 h-9 object-contain"
-                      style={{ 
-                        width: '35px', 
-                        height: '35px',
-                        filter: 'invert(48%) sepia(98%) saturate(2000%) hue-rotate(0deg) brightness(100%) contrast(100%)'
-                      }}
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.style.backgroundColor = '#FF5536';
-                        e.target.style.borderRadius = '6px';
-                        e.target.style.padding = '8px';
-                      }}
-                    />
-                  </div>
-
-                  {/* Title */}
-                  <h3 
-                    className="font-bold mb-2"
-                    style={{
-                      fontFamily: "'Cabinet Grotesk', sans-serif",
-                      fontWeight: 700,
-                      fontSize: '16px',
-                      lineHeight: '100%',
-                      letterSpacing: '-2%',
-                      color: '#13284C'
-                    }}
-                  >
-                    {service.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p 
-                    className="mb-3 leading-relaxed"
-                    style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontWeight: 400,
-                      fontSize: '12px',
-                      lineHeight: '150%',
-                      letterSpacing: '0%',
-                      color: '#606060'
-                    }}
-                  >
-                    {service.description}
-                  </p>
-
-                  {/* Explore Button - Always visible on mobile */}
-                  <Link 
-                    to={service.link}
-                    className="inline-flex items-center justify-center font-semibold"
-                    style={{
-                      width: '97px',
-                      height: '34px',
-                      background: 'transparent',
-                      border: '1px solid #000000',
-                      borderRadius: '0px',
-                      fontFamily: "'Inter', sans-serif",
-                      fontWeight: 500,
-                      fontSize: '11px',
-                      color: '#000000',
-                      textDecoration: 'none',
-                      gap: '6px'
-                    }}
-                  >
-                    Explore →
-                  </Link>
-                </div>
+                <img
+                  src="/icons/playbook-icon.png"
+                  alt="icon"
+                  style={{ width: '6px', height: '8.4px' }}
+                  onError={(e) => { e.target.style.display = 'none'; }}
+                />
+                <span style={{
+                  fontFamily: "'Roboto Mono', monospace",
+                  fontWeight: 500,
+                  fontSize: '12px',
+                  lineHeight: '100%',
+                  letterSpacing: '-0.02em',
+                  color: '#FE5538'
+                }}>
+                  SERVICE
+                </span>
               </div>
-            ))}
-          </div>
+            </div>
 
-          {/* Mobile Navigation Arrows */}
-          <div className="flex justify-center items-center gap-12 mt-6">
-            <button
-              onClick={handlePrev}
-              disabled={currentIndex === 0}
-              aria-label="Previous services"
-              className={`flex items-center justify-center transition-all duration-300 w-12 h-12 ${
-                currentIndex === 0 ? 'opacity-30 cursor-not-allowed' : 'opacity-100 hover:opacity-80'
-              }`}
+            {/* Heading — centered on mobile */}
+            <h2
               style={{
-                background: '#FF5536',
-                borderRadius: '50%'
+                fontFamily: "'Cabinet Grotesk', sans-serif",
+                fontWeight: 500,
+                fontSize: '28px',
+                lineHeight: '110%',
+                letterSpacing: '-0.02em',
+                textAlign: 'center',
+                color: '#000000',
+                margin: '0 0 32px 0'
               }}
             >
-              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            <button
-              onClick={handleNext}
-              disabled={currentIndex === services.length - 1}
-              aria-label="Next services"
-              className={`flex items-center justify-center transition-all duration-300 w-12 h-12 ${
-                currentIndex === services.length - 1 ? 'opacity-30 cursor-not-allowed' : 'opacity-100 hover:opacity-80'
-              }`}
-              style={{
-                background: '#FF5536',
-                borderRadius: '50%'
-              }}
-            >
-              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
+              Everything You Need for
+              Security Already Built
+            </h2>
+
+            {/* Mobile Carousel */}
+            <div style={{ position: 'relative' }} role="region" aria-label="Services carousel">
+              <div
+                ref={scrollRef}
+                onScroll={handleScroll}
+                role="list"
+                style={{
+                  display: 'flex',
+                  overflowX: 'auto',
+                  scrollSnapType: 'x mandatory',
+                  WebkitOverflowScrolling: 'touch',
+                  scrollbarWidth: 'none',
+                  msOverflowStyle: 'none',
+                  gap: '12px',
+                  paddingBottom: '16px',
+                  paddingLeft: 'calc(50% - 133.5px)',
+                  paddingRight: 'calc(50% - 133.5px)'
+                }}
+              >
+                <style>{`.msp-scroll::-webkit-scrollbar { display: none; }`}</style>
+                {services.map((service, index) => (
+                  <div
+                    key={index}
+                    role="listitem"
+                    style={{
+                      flexShrink: 0,
+                      scrollSnapAlign: 'center',
+                      width: '267px',
+                      minHeight: '209px',
+                      border: '0.78px solid #ADADAD',
+                      background: '#FFFFFF'
+                    }}
+                  >
+                    <div style={{ padding: '16px' }}>
+                      <div style={{ marginBottom: '12px' }}>
+                        <img
+                          src={service.icon}
+                          alt={service.title}
+                          style={{
+                            width: '35px',
+                            height: '35px',
+                            objectFit: 'contain',
+                            filter: 'invert(48%) sepia(98%) saturate(2000%) hue-rotate(0deg) brightness(100%) contrast(100%)'
+                          }}
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.style.backgroundColor = '#FF5536';
+                            e.target.style.borderRadius = '6px';
+                            e.target.style.padding = '8px';
+                          }}
+                        />
+                      </div>
+
+                      <h3
+                        style={{
+                          fontFamily: "'Cabinet Grotesk', sans-serif",
+                          fontWeight: 700,
+                          fontSize: '16px',
+                          lineHeight: '100%',
+                          letterSpacing: '-0.02em',
+                          color: '#13284C',
+                          marginBottom: '8px'
+                        }}
+                      >
+                        {service.title}
+                      </h3>
+
+                      <p
+                        style={{
+                          fontFamily: "'Inter', sans-serif",
+                          fontWeight: 400,
+                          fontSize: '12px',
+                          lineHeight: '150%',
+                          color: '#606060',
+                          marginBottom: '12px'
+                        }}
+                      >
+                        {service.description}
+                      </p>
+
+                      <Link
+                        to={service.link}
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          width: '97px',
+                          height: '34px',
+                          background: 'transparent',
+                          border: '1px solid #000000',
+                          borderRadius: '0px',
+                          fontFamily: "'Inter', sans-serif",
+                          fontWeight: 500,
+                          fontSize: '11px',
+                          color: '#000000',
+                          textDecoration: 'none',
+                          gap: '6px'
+                        }}
+                      >
+                        Explore →
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Mobile Navigation Arrows */}
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '48px', marginTop: '24px' }}>
+                <button
+                  onClick={handlePrev}
+                  disabled={currentIndex === 0}
+                  aria-label="Previous services"
+                  style={{
+                    width: '48px',
+                    height: '48px',
+                    background: '#FF5536',
+                    borderRadius: '50%',
+                    border: 'none',
+                    cursor: currentIndex === 0 ? 'not-allowed' : 'pointer',
+                    opacity: currentIndex === 0 ? 0.3 : 1,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    transition: 'opacity 0.3s'
+                  }}
+                >
+                  <svg width="20" height="20" fill="none" stroke="#FFFFFF" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <button
+                  onClick={handleNext}
+                  disabled={currentIndex === services.length - 1}
+                  aria-label="Next services"
+                  style={{
+                    width: '48px',
+                    height: '48px',
+                    background: '#FF5536',
+                    borderRadius: '50%',
+                    border: 'none',
+                    cursor: currentIndex === services.length - 1 ? 'not-allowed' : 'pointer',
+                    opacity: currentIndex === services.length - 1 ? 0.3 : 1,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    transition: 'opacity 0.3s'
+                  }}
+                >
+                  <svg width="20" height="20" fill="none" stroke="#FFFFFF" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
           </div>
         </div>
-
-      </div>
-
-      {/* Hide scrollbar CSS */}
-      <style>{`
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
-    </section>
+      </section>
+    </>
   );
 };
 

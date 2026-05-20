@@ -6,6 +6,8 @@ import TalkToExpert from './pages/TalkToExpert';
 import ForMSPsPage from './pages/ForMSPsPage';
 import SOCAugmentation from './pages/SOCAugmentation';
 import Aboutus from './pages/Aboutus';
+import IndustriesPage from './pages/IndustriesPage';
+
 
 
 function App() {
@@ -25,12 +27,13 @@ function App() {
             <Route path="/report-attack" element={<div className="pt-32 text-center text-white">Report Attack Page</div>} />
             <Route path="/services" element={<div className="pt-32 text-center text-white">Services Page</div>} />
             <Route path="/solutions" element={<div className="pt-32 text-center text-white">Solutions Page</div>} />
-            <Route path="/industries" element={<div className="pt-32 text-center text-white">Industries Page</div>} />
+            <Route path="/industries" element={<IndustriesPage />} />
             <Route path="/success-stories" element={<div className="pt-32 text-center text-white">Success Stories Page</div>} />
             <Route path="/resources" element={<div className="pt-32 text-center text-white">Resources Page</div>} />
             <Route path="/talk-to-experts" element={<TalkToExpert />} />
             <Route path="/services/for-msps" element={<ForMSPsPage />} />
             <Route path="/services/soc-augmentation" element={<SOCAugmentation />} />
+            
             <Route path="*" element={<div className="pt-32 px-4 text-center text-white">This page is coming soon.</div>} />
           </Routes>
         </main>
